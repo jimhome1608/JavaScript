@@ -60,14 +60,15 @@
             $(elm).removeClass("hyperlinkBlue");
             return;
           }  
-          let text =  elm.value;   
+          let text =  elm.value;  
+          text = text.trim(); 
           let textIsUrl = looksLikeUrl(text)
           switch(ev.type) 
           {
             case "mousedown":                            
               if (textIsUrl)
               {
-                if (text.indexOf("http") != 0);
+                if (text.indexOf("http") != 0) 
                   text = "http://"+text; 
                 window.open(text, '_blank'); 
               }
@@ -82,14 +83,37 @@
         }
         </script>
     <style>
-        .hyperlinkBlue:hover {color: blue; text-decoration: underline; cursor:pointer; font-weight: bold;}        
+        .hyperlinkBlue:hover {color: blue; text-decoration: underline; cursor:pointer; font-weight: bold;}  
+        td {padding-right: 25px;} 
+        body {font-family: verdana, arial, sans-serif; font-size: medium; padding-top: 50px; padding-left:50px;}
+        input {font-family: verdana, arial, sans-serif;  font-size: medium;}
     </style>
 </head>
 <body>
-   </script>
-    <label >Alternative Name</label>
-    <input   onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "www.google.com" type="text" id="fname" name="fname"><br><br>
-
+  <label style="color: darkgray;"> Hold down Control Key and hover over the URL to see as links.<br>Cl  ick with control key down to open the link </label>
+  <br><br>
+  <table>
+    <tr>
+      <td><label>First Name:</label> </td>  
+      <td><input onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "Buster" type="text" id="fname" name="fname"></td>  
+    </tr>
+    <tr>
+      <td><label>Surname:</label> </td>  
+      <td><input onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "Scruggs" type="text" id="fname" name="fname"></td>  
+    </tr>
+    <tr>
+      <td><label>Alt. Name:</label> </td>  
+      <td><input onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "www.google.com" type="text" id="fname" name="fname"></td>  
+    </tr>
+    <tr>
+      <td><label>Address1:</label> </td>  
+      <td><input onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "10 Smith Street" type="text" id="fname" name="fname"></td>  
+    </tr>
+    <tr>
+      <td><label>Address2:</label> </td>  
+      <td><input onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "www.theage.com.au" type="text" id="fname" name="fname"></td>  
+    </tr>
+  </table>
 </body>
 </html>
 

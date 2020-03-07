@@ -87,6 +87,7 @@ function AddUpTheNumberTo(v)
   return sum;
 }
 
-console.log(AddUpTheNumberTo(10));
+let text = "https://au.frontiersoftware.com/";
+console.log(text.indexOf("http"));
 
 
