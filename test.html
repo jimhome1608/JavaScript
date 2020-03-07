@@ -46,42 +46,39 @@
 					+ "\\-\\.\\+\\!\\*\\'\\(\\)\\,\\_])|(?:\\%[a-fA-F0-9]{2}))*)?"
 					+ "(?:\\b|$)";
           var numb = v.match(regexUrl);
-          if (numb)
-            return true;
-          else
-            return false;          
+          if (!numb)
+            return false;  
+          if (v.indexOf(' ') >= 0)        
+            return false;
+          return true;
         }
 
         function mouseDownOrMove(elm, ev) 
-        {
-           if (ev.type == "mousedown") 
-           {
-            if (!ev.ctrlKey) 
-            {
-              $(elm).removeClass("hyperlinkBlue");
-              return;
-            }     
-            let text =  elm.value;
-            if (looksLikeUrl(text))
-            {
-                if (text.indexOf("http") != 0);
-                  text = "http://"+text; 
-                window.open(text, '_blank'); 
-            }
-           }
-           if (ev.type == "mousemove") 
-            {
-              if (!ev.ctrlKey) 
+        {          
+          if (!ev.ctrlKey) 
+          {
+            $(elm).removeClass("hyperlinkBlue");
+            return;
+          }  
+          let text =  elm.value;   
+          let textIsUrl = looksLikeUrl(text)
+          switch(ev.type) 
+          {
+            case "mousedown":                            
+              if (textIsUrl)
               {
-                $(elm).removeClass("hyperlinkBlue");
-                return;
-              }   
-              let text =  elm.value;
-              if (looksLikeUrl(text))
+                  if (text.indexOf("http") != 0);
+                    text = "http://"+text; 
+                  window.open(text, '_blank'); 
+              }
+              break;
+            case "mousemove":
+              if (textIsUrl)
                 $(elm).addClass("hyperlinkBlue");
               else
-                $(elm).removeClass("hyperlinkBlue");            
-            }            
+                $(elm).removeClass("hyperlinkBlue");  
+              break;
+          }          
         }
         </script>
     <style>
