@@ -3,6 +3,19 @@
 <head>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <script>   
+
+        function looksLikeEmail(v) 
+        {
+          const regexEmail = 
+          "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
+          var numb = v.match(regexEmail);
+          if (!numb)
+            return false;  
+          if (v.indexOf(' ') >= 0)        
+            return false;
+          return true;
+        }
+        
         function looksLikeUrl(v)
         {
           const regexUrl =
@@ -68,6 +81,12 @@
             case "mousedown":                            
               if (textIsUrl)
               {
+                if (looksLikeEmail(text)) 
+                {                  
+                  text = "mailto:"+text; 
+                  window.open(text, '_blank'); 
+                  return;
+                }
                 if (text.indexOf("http") != 0) 
                   text = "http://"+text; 
                 window.open(text, '_blank'); 
@@ -86,7 +105,8 @@
         .hyperlinkBlue:hover {color: blue; text-decoration: underline; cursor:pointer; font-weight: bold;}  
         td {padding-right: 25px;} 
         body {font-family: verdana, arial, sans-serif; font-size: medium; padding-top: 50px; padding-left:50px;}
-        input {font-family: verdana, arial, sans-serif;  font-size: medium;}
+        input {font-family: verdana, arial, sans-serif;  font-size: medium; width:500px}     
+           
     </style>
 </head>
 <body>
@@ -95,7 +115,7 @@
   <table>
     <tr>
       <td><label>First Name:</label> </td>  
-      <td><input onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "Buster" type="text" id="fname" name="fname"></td>  
+      <td ><input onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "Buster" type="text" id="fname" name="fname"></td>  
     </tr>
     <tr>
       <td><label>Surname:</label> </td>  
@@ -111,7 +131,11 @@
     </tr>
     <tr>
       <td><label>Address2:</label> </td>  
-      <td><input onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "www.theage.com.au" type="text" id="fname" name="fname"></td>  
+      <td><input onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "https://au.frontiersoftware.com/" type="text" id="fname" name="fname"></td>  
+    </tr>
+    <tr>
+      <td><label>email::</label> </td>  
+      <td><input onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "jim@mobile.com.au" type="text" id="fname" name="fname"></td>  
     </tr>
   </table>
 </body>
