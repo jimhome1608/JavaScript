@@ -52,12 +52,15 @@
             return false;          
         }
 
-        function inputMouseDownOrKeyPress(elm, ev) 
+        function mouseDownOrMove(elm, ev) 
         {
            if (ev.type == "mousedown") 
            {
             if (!ev.ctrlKey) 
+            {
+              $(elm).removeClass("hyperlinkBlue");
               return;
+            }     
             let text =  elm.value;
             if (looksLikeUrl(text))
             {
@@ -66,8 +69,13 @@
                 window.open(text, '_blank'); 
             }
            }
-           if (ev.type == "keypress") 
+           if (ev.type == "mousemove") 
             {
+              if (!ev.ctrlKey) 
+              {
+                $(elm).removeClass("hyperlinkBlue");
+                return;
+              }   
               let text =  elm.value;
               if (looksLikeUrl(text))
                 $(elm).addClass("hyperlinkBlue");
@@ -77,13 +85,13 @@
         }
         </script>
     <style>
-        .hyperlinkBlue {color: blue; text-decoration: underline; cursor:pointer;}        
+        .hyperlinkBlue:hover {color: blue; text-decoration: underline; cursor:pointer; font-weight: bold;}        
     </style>
 </head>
 <body>
    </script>
     <label >Alternative Name</label>
-    <input   onkeypress="inputMouseDownOrKeyPress(this, event)" onmousedown="inputMouseDownOrKeyPress(this,event)" value = "special" type="text" id="fname" name="fname"><br><br>
+    <input   onmousemove="mouseDownOrMove(this, event)" onmousedown="mouseDownOrMove(this,event)" value = "www.google.com" type="text" id="fname" name="fname"><br><br>
 
 </body>
 </html>
