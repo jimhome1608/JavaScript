@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>        
+        function sayHello(el, ev) {
+            console.log("hello");
+            console.log(ev);
+            console.log(JSON.stringify(ev));
+            console.log(JSON.stringify(el));
+        }
+    </script>
+</head>
+<body>
+    <button onclick="sayHello(this, event)">Click Me</button>
+
+</body>
+</html>
